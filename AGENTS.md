@@ -1,0 +1,3 @@
+# Project instructions
+
+Keep the Magic UI design, original license and attribution. Personal facts live in src/data/profile.json. Preserve dataset versions and validation boundaries in project descriptions. Do not invent social accounts, metrics or production claims. Use withBasePath for ordinary anchors and static assets; use unprefixed application routes with next/link. GitHub Pages base paths are build-time settings. Run npm test and npm run build after deployment-related changes, then test the exported site under a nonempty base path. Do not copy private source archives or original full personal CV PDFs into public assets. Public resume content is generated from the profile file.

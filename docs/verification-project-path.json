@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-24",
+  "basePath": "/preview-portfolio",
+  "siteUrl": "https://example.github.io/preview-portfolio",
+  "checks": [
+    "project-path desktop: content, responsive layout, filtering, images, theme, blog navigation, resume, 404 PASS",
+    "project-path mobile: content, responsive layout, filtering, images, theme, blog navigation, resume, 404 PASS",
+    "project-path: robots and deployment-aware sitemap PASS"
+  ],
+  "failures": []
+}

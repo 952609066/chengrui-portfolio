@@ -1,0 +1,194 @@
+{
+  "name": "袁成睿",
+  "englishName": "Chengrui Yuan",
+  "initials": "CY",
+  "email": "gayuanchengrui2025@163.com",
+  "location": "深圳 / 香港",
+  "title": "计算机视觉 · 边缘 AI · 多模态应用",
+  "intro": "让视觉模型走进真实的机器人系统。",
+  "summary": "自动化本科，香港大学电机电子工程硕士在读。关注水下机器人感知、视觉模型训练与云边推理部署，也探索具有来源证据的多模态报告分析。",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "语义分割",
+    "目标检测",
+    "ONNX",
+    "TensorRT",
+    "DeepStream",
+    "Jetson Orin NX",
+    "ROS2",
+    "FastAPI",
+    "Docker",
+    "多模态 RAG"
+  ],
+  "education": [
+    {
+      "school": "香港大学",
+      "english": "The University of Hong Kong",
+      "degree": "电机电子工程 · 硕士",
+      "dates": "2025.09 — 2026.12（预计）",
+      "detail": "GPA 3.43 / 4.3",
+      "logo": "HKU"
+    },
+    {
+      "school": "福州大学",
+      "english": "Fuzhou University",
+      "degree": "自动化 · 本科",
+      "dates": "2021.09 — 2025.06",
+      "detail": "GPA 3.80 · 专业排名 7 / 56",
+      "logo": "FZU"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Neptune Robotics",
+      "companyChinese": "深圳纳百信息技术有限公司",
+      "role": "AI 视觉算法实习生",
+      "dates": "2026.04 — 2026.10",
+      "place": "深圳",
+      "description": "参与水下船体视觉检测，从数据、训练评估推进到模型服务、Jetson 板端部署与现场联调。",
+      "bullets": [
+        "参与海生物分割、漆况识别、水尺字符检测、船体部位识别与质量评估。",
+        "整合 11 个视觉模型；完成云端、GPU 主机部署及 10 模型运行服务的视频联调。",
+        "完成障碍物板端视觉服务，与下游 SLAM 团队完成实际联调和海测。"
+      ]
+    },
+    {
+      "company": "HKUiT",
+      "companyChinese": "香港实习",
+      "role": "Assistant AI Engineer",
+      "dates": "2025.10 — 2026.01",
+      "place": "香港",
+      "description": "参与导师落地项目的数据准备、标注流程和 AI 前沿技术调研。",
+      "bullets": [
+        "参与数据采集、数据集构建与清洗，协助训练和算法研究。",
+        "组织标注流程，撰写标注规范及英语技术调研文档。"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "marine",
+      "title": "水下海生物语义分割",
+      "english": "Underwater semantic segmentation",
+      "category": "视觉算法",
+      "dates": "2026.04 — 2026.10",
+      "status": "训练评估与云边交付",
+      "image": "marine.svg",
+      "description": "面向船体生物附着检测，对 7 类海生物及背景进行像素级分割，输出类别掩码与覆盖比例。",
+      "stack": ["PyTorch", "PIDNet", "SAM3-UNet", "Adapter", "TensorRT"],
+      "metric": "61.63%",
+      "metricLabel": "前景 mIoU · SAM3-UNet",
+      "bullets": [
+        "整理清水、黄水与负样本，校验标注、类别映射和数据版本。",
+        "训练 PIDNet-M；冻结 SAM3 ViT 主干，微调 Adapter 与解码器，结合 CE + Dice、加权采样和验证集早停。",
+        "封装云端分割服务；PIDNet-M 完成 ONNX、TensorRT 与 DeepStream 板端部署。"
+      ],
+      "evidence": "v8 测试集 477 张，7 个前景类别宏平均：SAM3-UNet mIoU 61.63%、Dice 75.54%；PIDNet-M mIoU 49.80%。",
+      "boundary": "新版 10,896 张数据集与 v8 测试属于不同版本；板端量化数据归属于 PIDNet-M。"
+    },
+    {
+      "id": "obstacle",
+      "title": "机器人障碍物感知与板端部署",
+      "english": "Perception, from camera to robot",
+      "category": "边缘部署",
+      "dates": "2026.04 — 2026.10",
+      "status": "SLAM 联调与海测",
+      "image": "obstacle.svg",
+      "description": "将障碍物分割接入 Orin NX 前后双相机，通过 ROS2 输出可与原图准确关联的类别 mask。",
+      "stack": ["Jetson Orin NX", "TensorRT", "DeepStream", "ROS2", "rosbag2"],
+      "metric": "双相机",
+      "metricLabel": "前后视输入与 mask 发布",
+      "bullets": [
+        "接入压缩图像、解码前选帧和 nvjpegdec 硬件 JPEG 解码，按启用相机数选择 batch 1 / 2。",
+        "对齐类别 ID、分辨率和 mono8 PNG / raw mask；保留输入时间戳与 frame_id。",
+        "配套 rosbag 异步录制、离线配对、验收可视化与 systemd 自启，与 SLAM 团队完成联调和海测。"
+      ],
+      "evidence": "形成相机输入 → 板端推理 → ROS2 发布 → SLAM 消费 → 海测复核的部署链路。",
+      "boundary": "本人贡献集中在视觉感知、部署和接口对接；不将其描述为独立研发完整 SLAM 或控制系统。"
+    },
+    {
+      "id": "service",
+      "title": "船体视觉多模型云边服务",
+      "english": "One interface, multiple vision tasks",
+      "category": "边缘部署",
+      "dates": "2026.04 — 2026.10",
+      "status": "云端与现场主机交付",
+      "image": "service.svg",
+      "description": "统一分类、检测、分割和评分模型的调用方式，将算法能力交付给云端和现场业务系统。",
+      "stack": ["FastAPI", "Docker", "CUDA", "阿里云 FC", "systemd"],
+      "metric": "11",
+      "metricLabel": "统一注册的视觉模型",
+      "bullets": [
+        "统一图片输入、批量推理、模型注册及结构化响应，维护权重、预处理与阈值配置。",
+        "完成 GPU 镜像、ACR / FC 部署与 Ubuntu / Blackwell 现场主机适配。",
+        "实现预热、就绪检查、请求限额、有界排队与版本维护；候选镜像通过 19 项接口用例。"
+      ],
+      "evidence": "10 模型运行服务完成 30 段视频、3,295 帧、829 批请求联调，32,950 条图片×模型结果执行成功。",
+      "boundary": "11 模型候选验收与 10 模型视频联调分别统计；执行成功不代表识别准确率。"
+    },
+    {
+      "id": "report",
+      "title": "多模态报告解析与结论比对",
+      "english": "From documents to traceable evidence",
+      "category": "多模态",
+      "dates": "2026.04 — 2026.10",
+      "status": "本地验证平台",
+      "image": "report.svg",
+      "description": "从船体检测 PDF 提取字段、图片和来源证据，结合视觉模型复检，组织可追溯的结论比对。",
+      "stack": ["PyMuPDF", "OCR", "Qwen-VL", "OpenCV", "FastAPI"],
+      "metric": "8 步",
+      "metricLabel": "报告处理与证据编排",
+      "bullets": [
+        "按页面特征组织原生文本、OCR 与 VLM 路由，保留页码、图像区域和异常状态。",
+        "串联报告接入、页面诊断、字段提取、证据关联、结论提取、视觉检测、结果归一与比对。",
+        "接入漆况及 SAM3-UNet 接口，加入同部位配对、JSON 与引用校验，显式呈现证据不足。"
+      ],
+      "evidence": "完成 108 页真实 PDF 的离线提取回归，修正异常图版区域并核对其他页面变化。",
+      "boundary": "处于本地验证阶段，包含抽样检测和 warning；提取回归不等于全量报告语义验收。"
+    },
+    {
+      "id": "rag",
+      "title": "漆况多模态知识检索",
+      "english": "Retrieval with a source",
+      "category": "多模态",
+      "dates": "2026.04 — 2026.10",
+      "status": "应用原型",
+      "image": "rag.svg",
+      "description": "将漆况图文案例整理为知识资产，通过多模态向量检索和 Qwen 生成带来源的回答。",
+      "stack": ["Multimodal Embedding", "Qwen", "FastAPI", "SSE"],
+      "metric": "141",
+      "metricLabel": "可追溯的图文知识资产",
+      "bullets": [
+        "完成图片、标注配对与字段归一化，保留资产 ID、来源、水况和面积信息。",
+        "实现 Embedding → Top-K 检索 → 上下文组织 → 回答与来源返回，支持过滤与空检索处理。",
+        "通过 SSE 推送来源、回答增量和完整结果，记录检索及生成分层耗时。"
+      ],
+      "evidence": "真实 Embedding / Qwen API；15 条文本查询 Hit@5 为 93.33%（14/15）。",
+      "boundary": "该次验证采用 memory 向量与 local 图片存储；文本检索命中率不是图片诊断准确率。"
+    },
+    {
+      "id": "robot-dog",
+      "title": "机器狗垃圾识别与云边协同",
+      "english": "Edge-cloud inspection",
+      "category": "视觉算法",
+      "dates": "2025.10 — 2026.03",
+      "status": "硕士毕业设计",
+      "image": "robot.svg",
+      "description": "面向工业巡检，将边缘检测、云端模型与 VLM 结合，组织检测展示和结构化报告。",
+      "stack": ["YOLO", "Raspberry Pi 5", "ROS2", "Docker", "VLM"],
+      "metric": "云边协同",
+      "metricLabel": "识别与巡检报告",
+      "bullets": [
+        "结合树莓派 5 的计算资源进行模型选型与多轮实验。",
+        "基于置信度、网络时延和 CPU 负载设计云边调度与时空去重。",
+        "将识别结果与 VLM 描述组织为 JSON / PDF，接入 ROS2 与前端展示。"
+      ],
+      "evidence": "边缘 YOLO 与云端检测、VLM 协同，输出结构化巡检报告。",
+      "boundary": "以毕业设计验证为范围，设备、网络与场景变化需分别评估。"
+    }
+  ],
+  "awards": ["美国大学生数学竞赛 S 奖 · 2023", "福州大学二等奖学金 · 2022"],
+  "heroTagline": "计算机视觉与边缘 AI",
+  "heroLines": ["让视觉模型走进", "真实的机器人系统。"]
+}
